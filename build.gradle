@@ -12,6 +12,7 @@ targetCompatibility = 1.8
 compileJava.options.encoding = 'UTF-8'
 
 version = '3.9.1'
+def port = '9005'
 
 // Gradle application plugin
 mainClassName = "edu.stanford.nlp.pipeline.StanfordCoreNLP"
@@ -66,4 +67,24 @@ eclipse {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.2'
+}
+task server(type: JavaExec) {
+  main = "edu.stanford.nlp.pipeline.StanfordCoreNLPServer"
+  classpath = sourceSets.main.runtimeClasspath
+  systemProperty "java.io.tmpdir", "/var/tmp"
+  maxHeapSize = "4g"
+  args "-port", port
+//  args "-timeout", 15000
+}
+
+task client(type: JavaExec) {
+  main = "edu.stanford.nlp.pipeline.StanfordCoreNLPClient"
+  classpath = sourceSets.main.runtimeClasspath
+  maxHeapSize = "4g"
+  args '-annotators', 'tokenize,ssplit,pos,lemma,ner,parse,dcoref,sentiment'
+  args '-outputFormat', 'text'
+  args '-backends', "localhost:${port}"
+  if (project.hasProperty("cargs")) {
+     args Eval.me(cargs)
+  }
 }
