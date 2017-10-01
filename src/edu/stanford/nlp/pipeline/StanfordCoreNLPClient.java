@@ -180,13 +180,6 @@ public class StanfordCoreNLPClient extends AnnotationPipeline  {
             stateLock.lock();
             try {
               freeAnnotators.add(freedAnnotator);
-
-              // If the queue is empty, and all the annotators have returned, we're done
-              if (queue.isEmpty() && freeAnnotators.size() == backends.size()) {
-                log.debug("All annotations completed. Signaling for shutdown");
-                shouldShutdown.signalAll();
-              }
-
               newlyFree.signal();
             } finally {
               stateLock.unlock();
