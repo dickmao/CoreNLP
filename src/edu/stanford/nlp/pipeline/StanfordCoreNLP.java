@@ -459,6 +459,8 @@ public class StanfordCoreNLP extends AnnotationPipeline  {
     } else if (props.getProperty("annotators") == null) {
       // this happens when some command line options are specified (e.g just "-filelist") but no properties file is.
       // we use the options that are given and let them override the default properties from the class path properties.
+      // [dkc] okay, but shouldn't we do this regardless of whether
+      // getProperty["annotators"] is null?
       Properties fromClassPath = loadPropertiesFromClasspath();
       fromClassPath.putAll(props);
       props = fromClassPath;
