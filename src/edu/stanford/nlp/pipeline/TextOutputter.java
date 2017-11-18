@@ -204,10 +204,12 @@ public class TextOutputter extends AnnotationOutputter {
       List<CoreLabel> tokens = annotation.get(CoreAnnotations.TokensAnnotation.class);
       pw.println("Tokens:");
       pw.println(annotation.get(CoreAnnotations.TextAnnotation.class));
-      for (CoreLabel token : tokens) {
-        int tokenCharBegin = token.get(CoreAnnotations.CharacterOffsetBeginAnnotation.class);
-        int tokenCharEnd = token.get(CoreAnnotations.CharacterOffsetEndAnnotation.class);
-        pw.println("[Text="+token.word()+" CharacterOffsetBegin="+tokenCharBegin+" CharacterOffsetEnd="+tokenCharEnd+ ']');
+      if (tokens != null) {
+        for (CoreLabel token : tokens) {
+          int tokenCharBegin = token.get(CoreAnnotations.CharacterOffsetBeginAnnotation.class);
+          int tokenCharEnd = token.get(CoreAnnotations.CharacterOffsetEndAnnotation.class);
+          pw.println("[Text="+token.word()+" CharacterOffsetBegin="+tokenCharBegin+" CharacterOffsetEnd="+tokenCharEnd+ ']');
+        }
       }
     }
 

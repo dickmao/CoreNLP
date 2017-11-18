@@ -17,6 +17,10 @@ def port = '9005'
 // Gradle application plugin
 mainClassName = "edu.stanford.nlp.pipeline.StanfordCoreNLP"
 
+run {
+    standardInput = System.in
+}
+
 // Jar creation
 jar {
     manifest {
