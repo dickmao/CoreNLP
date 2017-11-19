@@ -219,6 +219,9 @@ public class XMLOutputter extends AnnotationOutputter  {
         if (sentimentTree != null) {
           int sentiment = RNNCoreAnnotations.getPredictedClass(sentimentTree);
           sentElem.addAttribute(new Attribute("sentimentValue", Integer.toString(sentiment)));
+          // List<Double> sentimentPredictions =
+          //       RNNCoreAnnotations.getPredictionsAsStringList(sentimentTree);
+          // sentElem.addAttribute(new Attribute("sentimentDistribution", unimplemented_serialize(sentimentPredictions)));
           String sentimentClass = sentence.get(SentimentCoreAnnotations.SentimentClass.class);
           sentElem.addAttribute(new Attribute("sentiment", sentimentClass.replaceAll(" ", "")));
         }

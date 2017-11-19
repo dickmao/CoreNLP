@@ -120,11 +120,10 @@ public class RNNCoreAnnotations {
     }
     Integer val = ((CoreLabel) label).get(PredictedClass.class);
     SimpleMatrix predictions = ((CoreLabel) label).get(Predictions.class);
-    if (val != null) {
+    if (val != null && predictions != null) {
       return predictions.get(val);
-    } else {
-      return -1.0;
     }
+    return -1.0;
   }
 
 
