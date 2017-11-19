@@ -86,20 +86,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = '3.2'
 }
 
-task server(type: JavaExec) {
-  main = "edu.stanford.nlp.pipeline.StanfordCoreNLPServer"
-  classpath = sourceSets.main.runtimeClasspath
-  systemProperty "java.io.tmpdir", "/var/tmp"
-  maxHeapSize = "4g"
-  args "-port", port
-//  args "-timeout", 15000
-}
-
 class RunMainTask extends JavaExec {
 }  
 
 tasks.withType(RunMainTask) {
-  main = "edu.stanford.nlp.pipeline.StanfordCoreNLPClient"
   classpath = sourceSets.main.runtimeClasspath
   maxHeapSize = "4g"
   args '-annotators', 'tokenize,ssplit,pos,lemma,ner,parse,dcoref,sentiment'
@@ -146,8 +136,10 @@ distDocker {
     defaultCommand = ["-quiet", "-port", "9005"]
 }
 
-task runbatch (type: RunMainTask) {
+task debug (type: RunMainTask) {
   main = "edu.stanford.nlp.pipeline.StanfordCoreNLP"
+  args '-annotators', 'tokenize,ssplit,pos,lemma,ner,parse,dcoref,sentiment'
+  jvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006"]
 }
 
 task server(type: JavaExec) {
@@ -159,4 +151,3 @@ task server(type: JavaExec) {
 //  args "-timeout", 15000
 //  jvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5007"]
 }
-
