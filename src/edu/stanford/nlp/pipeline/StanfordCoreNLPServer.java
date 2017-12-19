@@ -923,7 +923,11 @@ public class StanfordCoreNLPServer implements Runnable {
           callback.accept(new FinishedRequest(props, completedAnnotation, params.get("pattern"), null));
         }
       } catch (InterruptedException | ExecutionException | TimeoutException e) {
-        respondError("Timeout when executing TokensRegex query", httpExchange);
+        e.printStackTrace();
+        try {
+          respondError(e.getClass().getName() + ": " + e.getMessage(), httpExchange);
+        } catch (IOException ignored) {
+        }
       }
     }
   }
