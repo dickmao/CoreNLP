@@ -25,10 +25,13 @@ def port = '9005'
 
 // Gradle application plugin
 mainClassName = "edu.stanford.nlp.pipeline.StanfordCoreNLPServer"
+<<<<<<< b10692c0df03cca976776eea282dba1421d05cf4
 
 run {
     standardInput = System.in
 }
+=======
+>>>>>>> distDocker
 
 run {
     standardInput = System.in
@@ -136,18 +139,3 @@ distDocker {
     defaultCommand = ["-quiet", "-port", "9005"]
 }
 
-task debug (type: RunMainTask) {
-  main = "edu.stanford.nlp.pipeline.StanfordCoreNLP"
-  args '-annotators', 'tokenize,ssplit,pos,lemma,ner,parse,dcoref,sentiment'
-  jvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006"]
-}
-
-task server(type: JavaExec) {
-  main = "edu.stanford.nlp.pipeline.StanfordCoreNLPServer"
-  classpath = sourceSets.main.runtimeClasspath
-  maxHeapSize = "4g"
-  systemProperty "java.io.tmpdir", "/var/tmp"
-  args "-port", port
-//  args "-timeout", 15000
-//  jvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5007"]
-}
