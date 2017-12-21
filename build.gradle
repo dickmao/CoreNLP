@@ -125,8 +125,9 @@ task server(type: JavaExec) {
 applicationName = 'corenlp'
 distDocker {
     addFile("./edu", "/edu")
-    exposePort(9000)
+    exposePort(9005)
     push = true
     tagVersion = 'latest'
     registry = '303634175659.dkr.ecr.us-east-2.amazonaws.com'
+    defaultCommand = '-quiet -port 9005'
 }
