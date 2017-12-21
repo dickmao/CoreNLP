@@ -6,6 +6,14 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
 apply plugin: 'idea'
+apply plugin: 'docker'
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
 
 // Gradle java plugin
 sourceCompatibility = 1.8
@@ -16,7 +24,7 @@ version = '3.9.1'
 def port = '9005'
 
 // Gradle application plugin
-mainClassName = "edu.stanford.nlp.pipeline.StanfordCoreNLP"
+mainClassName = "edu.stanford.nlp.pipeline.StanfordCoreNLPServer"
 
 run {
     standardInput = System.in
@@ -112,4 +120,13 @@ task server(type: JavaExec) {
   args "-port", port
 //  args "-timeout", 15000
 //  jvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5007"]
+}
+
+applicationName = 'corenlp'
+distDocker {
+    addFile("./edu", "/edu")
+    exposePort(9000)
+    push = true
+    tagVersion = 'latest'
+    registry = '303634175659.dkr.ecr.us-east-2.amazonaws.com'
 }
