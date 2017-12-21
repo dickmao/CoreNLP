@@ -25,13 +25,6 @@ def port = '9005'
 
 // Gradle application plugin
 mainClassName = "edu.stanford.nlp.pipeline.StanfordCoreNLPServer"
-<<<<<<< b10692c0df03cca976776eea282dba1421d05cf4
-
-run {
-    standardInput = System.in
-}
-=======
->>>>>>> distDocker
 
 run {
     standardInput = System.in
