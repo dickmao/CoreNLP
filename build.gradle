@@ -118,6 +118,7 @@ task server(type: JavaExec) {
   maxHeapSize = "4g"
   systemProperty "java.io.tmpdir", "/var/tmp"
   args "-port", port
+  args "-quiet"
 //  args "-timeout", 15000
 //  jvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5007"]
 }
@@ -125,7 +126,7 @@ task server(type: JavaExec) {
 applicationName = 'corenlp'
 distDocker {
     addFile("./edu", "/edu")
-    exposePort(9005)
+    exposePort(port.toInteger())
     push = true
     tagVersion = 'latest'
     registry = '303634175659.dkr.ecr.us-east-2.amazonaws.com'

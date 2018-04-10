@@ -24,6 +24,7 @@
     <path id="classpath">
       <fileset dir="${basedir}/lib">
         <include name="*.jar"/>
+        <include name="*.properties"/>
         <exclude name="javanlp*"/>
       </fileset>
       <fileset dir="${basedir}/liblocal">
