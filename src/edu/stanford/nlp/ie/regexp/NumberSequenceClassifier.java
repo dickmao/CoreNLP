@@ -582,6 +582,8 @@ public class NumberSequenceClassifier extends AbstractSequenceClassifier<CoreLab
 
   private static final Pattern DATE_PATTERN = Pattern.compile("(?:[1-9]|[0-3][0-9])\\\\?/(?:[1-9]|[0-3][0-9])\\\\?/[1-3][0-9]{3}");
 
+  private static final Pattern DATE_PATTERN3 = Pattern.compile("(?:[1-9]|[0-3][0-9])/(?:[1-9]|[0-3][0-9])");
+
   private static final Pattern DATE_PATTERN2 = Pattern.compile("[12][0-9]{3}[-/](?:0?[1-9]|1[0-2])[-/][0-3][0-9]");
 
   private static final Pattern TIME_PATTERN = Pattern.compile("[0-2]?[0-9]:[0-5][0-9]");
@@ -639,6 +641,8 @@ public class NumberSequenceClassifier extends AbstractSequenceClassifier<CoreLab
         } else if (DATE_PATTERN.matcher(me.word()).matches()) {
           me.set(CoreAnnotations.AnswerAnnotation.class, "DATE");
         } else if (DATE_PATTERN2.matcher(me.word()).matches()) {
+          me.set(CoreAnnotations.AnswerAnnotation.class, "DATE");
+        } else if (DATE_PATTERN3.matcher(me.word()).matches()) {
           me.set(CoreAnnotations.AnswerAnnotation.class, "DATE");
 
         } else if (next.get(CoreAnnotations.TextAnnotation.class) != null &&
