@@ -27,12 +27,20 @@ jobs:
           - v1-dependencies-
 
       # build and push Docker image
-      - run: |
-          gradle distDocker
+      - run:
+          command: |
+            for jar in stanford-english-corenlp-2018-02-27-models.jar stanford-english-kbp-corenlp-2018-02-27-models.jar ; do
+              wget --no-clobber http://nlp.stanford.edu/software/$jar
+              jar xf $jar
+            done
+            eval `aws ecr get-login --no-include-email --region $AWS_REGION`
+            gradle distDocker
 
       - save_cache:
           paths:
             - ~/.m2
             - ~/.gradle
+            - stanford-english-corenlp-2018-02-27-models.jar
+            - stanford-english-kbp-corenlp-2018-02-27-models.jar
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
