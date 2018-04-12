@@ -370,7 +370,9 @@
   # Tokenizer "sometimes adds extra slash
   { ruleType: "time", pattern: /yyyy\\?\/MM\\?\/dd/ }
   { ruleType: "time", pattern: /MM?\\?\/dd?\\?\/(yyyy|yy)/ }
+  { ruleType: "time", pattern: /MM?\\?\/dd?\\?/ }
   { ruleType: "time", pattern: /MM?-dd?-(yyyy|yy)/ }
+  { ruleType: "time", pattern: /MM?-dd?/ }
   { ruleType: "time", pattern: /HH?:mm(:ss)?(Z)?/ }
   { ruleType: "time", pattern: /yyyy-MM/ }
 
