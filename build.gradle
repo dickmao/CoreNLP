@@ -125,6 +125,11 @@ task server(type: JavaExec) {
 
 applicationName = 'corenlp'
 distDocker {
+    copy {
+      from 'src/edu/stanford/nlp/time/rules'
+      into 'edu/stanford/nlp/models/sutime'
+      include '**/*.txt'
+    }
     addFile("./edu", "/edu")
     exposePort(port.toInteger())
     push = true
