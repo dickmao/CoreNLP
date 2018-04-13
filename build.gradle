@@ -22,6 +22,7 @@ compileJava.options.encoding = 'UTF-8'
 
 version = '3.9.1'
 def port = '9005'
+def maxLength = '60'
 
 // Gradle application plugin
 mainClassName = "edu.stanford.nlp.pipeline.StanfordCoreNLPServer"
@@ -119,6 +120,7 @@ task server(type: JavaExec) {
   systemProperty "java.io.tmpdir", "/var/tmp"
   args "-port", port
   args "-quiet"
+  args "-maxLength", maxLength
 //  args "-timeout", 15000
 //  jvmArgs = ["-Xdebug", "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5007"]
 }
@@ -135,6 +137,6 @@ distDocker {
     push = true
     tagVersion = 'latest'
     registry = '303634175659.dkr.ecr.us-east-2.amazonaws.com'
-    defaultCommand = ["-quiet", "-port", "9005", "-maxLength", "80"]
+    defaultCommand = ["-quiet", "-port", port, "-maxLength", maxLength]
 }
 
