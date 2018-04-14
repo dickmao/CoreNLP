@@ -140,6 +140,6 @@ distDocker {
     tagVersion = 'latest'
     registry = '303634175659.dkr.ecr.us-east-2.amazonaws.com'
     setEnvironment('JAVA_OPTS', '-Xmx4g')
-    defaultCommand = ["-port", port, "-maxLength", maxLength, "-annotators", annotators]
+    defaultCommand = ["-quiet", "-port", port, "-maxLength", maxLength, "-annotators", annotators]
 }
 
