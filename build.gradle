@@ -136,8 +136,8 @@ distDocker {
     }
     addFile("./edu", "/edu")
     exposePort(port.toInteger())
-    push = true
-    tagVersion = 'latest'
+    push = false
+    tagVersion = '3.8.0'
     registry = '303634175659.dkr.ecr.us-east-2.amazonaws.com'
     setEnvironment('JAVA_OPTS', '-Xmx4g')
     defaultCommand = ["-quiet", "-port", port, "-maxLength", maxLength, "-annotators", annotators]
